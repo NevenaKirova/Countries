@@ -5,85 +5,86 @@ function onHashChange() {
   let page = location.hash.slice(1);
 
   if (!userManager.checkLoggedUser()) {
-    homePage.style.display = "none";
-    loginForm.style.display = "block";
-    registerForm.style.display = "none";
-    singleCardContainer.style.display = "none";
-    errorPage.style.display = "none";
-    followedPage.style.display = "none";
+    HOME_PAGE.style.display = "none";
+    LOGIN_FORM .style.display = "block";
+    REGISTER_FORM.style.display = "none";
+    SINGLE_CARD_CONTAINER.style.display = "none";
+    ERROR_PAGE.style.display = "none";
+    FOLLOWED_PAGE.style.display = "none";
 
-    brandLink.style.display = "none";
-    favouritesLink.style.display = "none";
-    loginLink.style.display = "block";
-    registerLink.style.display = "block";
-    logOutBtn.style.display = "none";
-    errorPage.style.display = "none";
-    homeNav.style.display = "none";
+    BRAND_LINK.style.display = "none";
+    FAVOURITES_LINK.style.display = "none";
+    LOGIN_LINK.style.display = "block";
+    REGISTER_LINK.style.display = "block";
+    LOGOUT_BTN .style.display = "none";
+    ERROR_PAGE.style.display = "none";
+    HOME_NAV.style.display = "none";
   } else {
     getAllCountries();
-    homeNav.style.display = "block";
-    brandLink.style.display = "block";
-    favouritesLink.style.display = "block";
-    loginLink.style.display = "none";
-    registerLink.style.display = "none";
-    logOutBtn.style.display = "block";
-    errorPage.style.display = "none";
-    followedPage.style.display = "none";
+    HOME_NAV.style.display = "block";
+    BRAND_LINK.style.display = "block";
+    FAVOURITES_LINK.style.display = "block";
+    LOGIN_LINK.style.display = "none";
+    REGISTER_LINK.style.display = "none";
+    LOGOUT_BTN .style.display = "block";
+    ERROR_PAGE.style.display = "none";
+    FOLLOWED_PAGE.style.display = "none";
   }
 
   if (page.includes("forecast/")) {
     printCountry(userManager.getLastOpenedCountry());
     showLocationDetails(userManager.getLastOpenedCountry());
-    homePage.style.display = "none";
-    loginForm.style.display = "none";
-    registerForm.style.display = "none";
-    singleCardContainer.style.display = "block";
-    errorPage.style.display = "none";
-    followedPage.style.display = "none";
-    followedPage.innerHTML = "";
+    HOME_PAGE.style.display = "none";
+    LOGIN_FORM .style.display = "none";
+    REGISTER_FORM.style.display = "none";
+    SINGLE_CARD_CONTAINER.style.display = "block";
+    ERROR_PAGE.style.display = "none";
+    FOLLOWED_PAGE.style.display = "none";
+    FOLLOWED_PAGE.innerHTML = "";
+    return;
   }
 
   switch (page) {
     case "home":
-      homePage.style.display = "block";
-      loginForm.style.display = "none";
-      registerForm.style.display = "none";
-      singleCardContainer.style.display = "none";
-      errorPage.style.display = "none";
-      followedPage.style.display = "none";
-      followedPage.innerHTML = "";
+      HOME_PAGE.style.display = "block";
+      LOGIN_FORM .style.display = "none";
+      REGISTER_FORM.style.display = "none";
+      SINGLE_CARD_CONTAINER.style.display = "none";
+      ERROR_PAGE.style.display = "none";
+      FOLLOWED_PAGE.style.display = "none";
+      FOLLOWED_PAGE.innerHTML = "";
       break;
     case "login":
-      homePage.style.display = "none";
-      loginForm.style.display = "block";
-      registerForm.style.display = "none";
-      singleCardContainer.style.display = "none";
-      errorPage.style.display = "none";
-      followedPage.style.display = "none";
+      HOME_PAGE.style.display = "none";
+      LOGIN_FORM .style.display = "block";
+      REGISTER_FORM.style.display = "none";
+      SINGLE_CARD_CONTAINER.style.display = "none";
+      ERROR_PAGE.style.display = "none";
+      FOLLOWED_PAGE.style.display = "none";
       break;
     case "register":
-      homePage.style.display = "none";
-      loginForm.style.display = "none";
-      registerForm.style.display = "block";
-      singleCardContainer.style.display = "none";
-      errorPage.style.display = "none";
-      followedPage.style.display = "none";
+      HOME_PAGE.style.display = "none";
+      LOGIN_FORM .style.display = "none";
+      REGISTER_FORM.style.display = "block";
+      SINGLE_CARD_CONTAINER.style.display = "none";
+      ERROR_PAGE.style.display = "none";
+      FOLLOWED_PAGE.style.display = "none";
       break;
-    case "followedPage":
-      homePage.style.display = "none";
-      loginForm.style.display = "none";
-      registerForm.style.display = "none";
-      singleCardContainer.style.display = "none";
-      errorPage.style.display = "none";
-      followedPage.style.display = "block";
+    case "FOLLOWED_PAGE":
+      HOME_PAGE.style.display = "none";
+      LOGIN_FORM .style.display = "none";
+      REGISTER_FORM.style.display = "none";
+      SINGLE_CARD_CONTAINER.style.display = "none";
+      ERROR_PAGE.style.display = "none";
+      FOLLOWED_PAGE.style.display = "block";
       break;
 
-    // default:
-    //   homePage.style.display = "none";
-    //   loginForm.style.display = "none";
-    //   registerForm.style.display = "none";
-    //   singleCardContainer.style.display = "none";
-    //   errorPage.style.display = "block";
+    default:
+      HOME_PAGE.style.display = "none";
+      LOGIN_FORM .style.display = "none";
+      REGISTER_FORM.style.display = "none";
+      SINGLE_CARD_CONTAINER.style.display = "none";
+      ERROR_PAGE.style.display = "block";
   }
 }
 
@@ -91,7 +92,7 @@ function getAllCountries() {
   fetch("https://restcountries.eu/rest/v2/all")
     .then((res) => res.json())
     .then((res) => {
-      printCountryCards(cardsContainer, res);
+      printCountryCards(CARDS_CONTAINER, res);
     });
 }
 
@@ -142,7 +143,7 @@ function printCountryCards(container, countries) {
       ev.preventDefault();
       userManager.addLocation(countries[i]);
       console.log(userManager.getCurrentUser().favourites);
-      printCountryCards(followedPage, favourites);
+      printCountryCards(FOLLOWED_PAGE, favourites);
     });
 
     buttonContainer.append(button1, button2);
@@ -154,7 +155,7 @@ function printCountryCards(container, countries) {
 }
 
 function printCountry(country) {
-  singleCardContainer.innerHTML = "";
+  SINGLE_CARD_CONTAINER.innerHTML = "";
 
   let card = createElement("div");
   card.classList.add("card");
@@ -170,7 +171,7 @@ function printCountry(country) {
 
   cardBody.append(name);
   card.append(img, cardBody);
-  singleCardContainer.append(card);
+  SINGLE_CARD_CONTAINER.append(card);
 }
 
 function getForecast(country) {
@@ -208,16 +209,18 @@ function showLocationDetails(countries) {
             let date = createElement("p");
             let newDate = new Date(res.properties.timeseries[i].time);
             date.innerText = "Time: " + newDate;
-            forecastContainer.append(forecastBox);
             forecastBox.append(date, temperature);
+            forecastContainer.append(forecastBox);
+            
           }
-          singleCardContainer.append(forecastContainer);
+          
+          SINGLE_CARD_CONTAINER.append(forecastContainer);
         });
     });
 }
 
 function showCountries() {
-  let country = countryInput.value;
+  let country = COUNTRY_INPUT.value;
 
   if (country === "") {
     getAllCountries();
@@ -226,7 +229,7 @@ function showCountries() {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        printCountryCards(cardsContainer, res);
+        printCountryCards(CARDS_CONTAINER, res);
       });
   }
 }

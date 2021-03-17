@@ -15,10 +15,10 @@ function validateEmail(email) {
   }
 }
 
-loginBtn.addEventListener("click", function (ev) {
+LOGIN_BTN.addEventListener("click", function (ev) {
   ev.preventDefault();
-  let email = loginInputEmail.value;
-  let password = loginInputPassword.value;
+  let email = LOGIN_INPUT_EMAIL.value;
+  let password = LOGIN_INPUT_PASSWORD.value;
 
   if (userManager.login(email, password)) {
     location.hash = "home";
@@ -26,39 +26,40 @@ loginBtn.addEventListener("click", function (ev) {
   }
 });
 
-registerBtn.addEventListener("click", function (ev) {
+REGISTER_BTN.addEventListener("click", function (ev) {
   ev.preventDefault();
-  let email = registerInputEmail;
-  let password = registerInputPassword;
+  let email = REGISTER_INPUT_EMAIL;
+  let password = REGISTER_INPUT_PASSWORD;
 
   if (!validateEmail(email) || password.value === "") {
-    registrationForm.reset();
+    REGISTRATION_FORM.reset();
     return;
   } else {
     userManager.register(email.value, password.value);
-    loginForm.style.display = "block";
-    registerForm.style.display = "none";
-    registrationForm.reset();
+    LOGIN_FORM .style.display = "block";
+    REGISTER_FORM.style.display = "none";
+    REGISTRATION_FORM.reset();
   }
 });
 
-logOutBtn.addEventListener("click", function (ev) {
+LOGOUT_BTN.addEventListener("click", function (ev) {
   ev.preventDefault();
   userManager.logOut();
-  followedPage.innerHTML ="";
+  FOLLOWED_PAGE.innerHTML ="";
   location.hash = "login"
   
 });
 
 let debaunced =  debounce(showCountries,500);
 
-countryInput.addEventListener("input", debaunced);
+COUNTRY_INPUT.addEventListener("input", debaunced);
 
 
 
 
-favouritesLink.addEventListener("click", function(){
+FAVOURITES_LINK.addEventListener("click", function(){
   let favourites = userManager.getCurrentUser().favourites;
-  printCountryCards(followedPage,favourites);
+  HOME_PAGE.style.display = "none";
+  printCountryCards(FOLLOWED_PAGE,favourites);
 })
 
