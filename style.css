@@ -1,0 +1,19 @@
+.form{
+    background: #21252952;
+    font-size: 14px;
+    color:#343d42;
+    border-radius: 0 0 4px 4px;
+    padding: 33px;
+}
+
+.login-btn{
+    padding: 10px 123px;
+}
+
+.login,.register{
+    display: none;
+}
+
+.logo{
+    width: 50px;
+}
